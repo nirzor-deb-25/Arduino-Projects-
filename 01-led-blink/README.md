@@ -10,7 +10,8 @@ This is the first project in my Arduino learning journey. It demonstrates the mo
 - Basic LED circuit wiring: current-limiting resistor, anode/cathode orientation, and completing the circuit back to GND
 
 ## Circuit
-![Circuit Diagram](./circuit-diagram.png)
+
+![Circuit Diagram](./Circuit%20Diagram%203.png)
 
 - LED anode connected through a 220Ω resistor to Arduino pin 13
 - LED cathode connected to Arduino GND
