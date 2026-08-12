@@ -11,7 +11,7 @@ This project takes the basic LED blink from Project 1 and rebuilds it using `mil
 - Using `Serial.println()` to monitor what the program is doing in real time via the Serial Monitor
 
 ## Circuit
-![Circuit Diagram](./circuit-diagram.png)
+![Circuit Diagram](./Circuit%20Diagram%204.png)
 
 - LED anode connected through a 220Ω resistor to Arduino pin 13
 - LED cathode connected to Arduino GND
