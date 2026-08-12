@@ -21,8 +21,8 @@ Built and simulated using [Wokwi](https://wokwi.com/).
 
 ## 🔌 Circuit Diagram
 
-![Circuit Diagram 1]
-![Circuit Diagram 2]
+![Circuit Diagram 1](Circuit%20Diagram%201.png)
+![Circuit Diagram 2](Circuit%20Diagram%202%20.png)
 
 ## 🔗 Wiring
 
