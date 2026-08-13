@@ -11,7 +11,8 @@ This project extends the basic traffic light simulation by adding a pedestrian c
 - How to create a blinking "walk ending" warning using non-blocking timing inside a specific state
 
 ## Circuit
-![Circuit Diagram](./Circuit%20Diagram%207.png)
+![Circuit Diagram - Traffic Lights](./Circuit%20Diagram%207.png)
+![Circuit Diagram - Pedestrian Button](./Circuit%20Diagram%208.png)
 
 - Red LED → 220Ω resistor → pin 10 → GND
 - Yellow LED → 220Ω resistor → pin 11 → GND
