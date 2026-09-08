@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 0.6, "left": -0.6, "attrs": {} },
+    { "type": "wokwi-7segment", "id": "sevseg1", "top": 62.58, "left": 302.68, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 217.4,
+      "left": 288,
+      "attrs": { "color": "green", "xray": "1" }
+    }
+  ],
+  "connections": [
+    [ "sevseg1:A", "uno:2", "green", [ "v0" ] ],
+    [ "sevseg1:B", "uno:3", "green", [ "v0" ] ],
+    [ "sevseg1:C", "uno:4", "green", [ "v0" ] ],
+    [ "sevseg1:D", "uno:5", "green", [ "v0" ] ],
+    [ "sevseg1:E", "uno:6", "green", [ "v0" ] ],
+    [ "sevseg1:F", "uno:7", "green", [ "v0" ] ],
+    [ "sevseg1:G", "uno:8", "green", [ "v0" ] ],
+    [ "sevseg1:COM.1", "uno:GND.1", "black", [ "h0" ] ],
+    [ "btn1:2.l", "uno:GND.1", "black", [ "h-172.8", "v-249.4" ] ],
+    [ "btn1:1.l", "uno:9", "green", [ "h0" ] ]
+  ],
+  "dependencies": {}
+}
