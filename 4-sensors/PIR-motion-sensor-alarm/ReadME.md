@@ -11,8 +11,8 @@ This project uses an HC-SR501 PIR (Passive Infrared) motion sensor to detect mov
 - How to use `tone()` and `noTone()` to control a buzzer instead of just switching it on/off
 
 ## Circuit
-[Circuit Diagram](./Circuit_Diagram_27.png)
-[Circuit Diagram](./Circuit_Diagram_28.png)
+[Circuit Diagram 1](./Circuit%20Diagram%2027.png)
+[Circuit Diagram 2](./Circuit%20Diagram%2028.png)
 
 - PIR VCC → Arduino 5V
 - PIR GND → Arduino GND
