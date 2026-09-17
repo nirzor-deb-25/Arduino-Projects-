@@ -10,7 +10,8 @@ This project uses a potentiometer to control a servo motor's angle in real time,
 - Why a small delay after `.write()` helps the servo move smoothly rather than jumping erratically
 
 ## Circuit
-![Circuit Diagram](./Circuit%20Diagram%2016.png)
+![Circuit Diagram - Minimum Position](./Circuit%20Diagram%2016.png)
+![Circuit Diagram - Maximum Position](./Circuit%20Diagram%2017.png)
 
 - Potentiometer VCC → Arduino 5V
 - Potentiometer GND → Arduino GND
@@ -53,13 +54,12 @@ void loop() {
 ```
 
 ## Test Results
-- Pot: 562 → Angle: 98
-- Pot: 632 → Angle: 111
-- Pot: 613 → Angle: 107
-- Angle tracked the potentiometer proportionally across its range, confirming the mapping and servo response were both correct
+- Potentiometer at minimum: Pot = 0, Angle = 0 (servo at one extreme)
+- Potentiometer at maximum: Pot = 1023, Angle = 180 (servo at the opposite extreme)
+- Servo angle tracked the potentiometer smoothly and proportionally across the full range
 
 ## Key Takeaway
-Libraries abstract away complex low-level timing (like the precise pulse widths a servo needs) so the code can focus on logic rather than hardware signal generation. This was also confirmation that a well-understood pattern — reading an analog input and mapping it to an output — generalizes across very different types of outputs.
+Libraries abstract away complex low-level timing (like the precise pulse widths a servo needs) so the code can focus on logic rather than hardware signal generation. This project also confirmed that a well-understood pattern — reading an analog input and mapping it to an output — generalizes across very different types of outputs, from LED brightness to motor angle.
 
 ## Simulation
 Built and tested on [Wokwi](https://wokwi.com).
