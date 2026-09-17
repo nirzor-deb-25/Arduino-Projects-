@@ -11,8 +11,8 @@ This project simulates a soil moisture sensor using a potentiometer, since Wokwi
 - How a single analog pin can drive both a percentage readout and a simple digital alert (LED) at the same time
 
 ## Circuit
-[Circuit Diagram 1](./Circuit_Diagram_29.png)
-[Circuit Diagram 2](./Circuit_Diagram_30.png)
+[Circuit Diagram 1](./Circuit%20Diagram%2029.png)
+[Circuit Diagram 2](./Circuit%20Diagram%2030.png)
 
 - Potentiometer VCC → Arduino 5V
 - Potentiometer GND → Arduino GND
