@@ -1,80 +1,60 @@
-# Button Interrupt (attachInterrupt)
+# Timer-Based Blinking (millis-based)
 
 ## Overview
-This project introduces hardware interrupts using `attachInterrupt()`. Instead of continuously checking the button's state inside `loop()` (a technique called polling), the Arduino is told to react the instant the button is pressed — pausing whatever `loop()` is doing to run a special function called an Interrupt Service Routine (ISR). This is the first project in the Interrupts & Timers stage, and it changes how the whole program is structured: `loop()` no longer needs to know or care about the button at all.
+This project revisits non-blocking LED blinking using `millis()`, now framed explicitly as a software timing technique within the Interrupts & Timers category. It uses the same core pattern introduced in the early "Blink Without Delay" project, reinforced here as a foundation before moving into hardware interrupts and rotary encoders.
 
 ## What I Learned
-- The difference between polling (checking a pin's state every loop cycle) and interrupts (being notified the instant a pin's state changes)
-- That on an Arduino Uno, only pins 2 and 3 support hardware interrupts via `attachInterrupt()` — this is a hardware limitation of the chip, not something configurable in code
-- Why interrupt-related variables must be declared `volatile`, so the compiler doesn't optimize away changes that happen unexpectedly from inside an ISR
-- Why debouncing matters even more with interrupts than with polling: a single mechanical button press can trigger the interrupt multiple times within milliseconds due to physical contact bounce
-- Why `Serial.print()` and other slow operations should be avoided inside an ISR — the ISR should do the minimum work possible (update a variable) and let `loop()` handle anything slower, like printing
+- Reinforced the `millis()`-based non-blocking timing pattern: tracking elapsed time with a `previousMillis` variable instead of freezing execution with `delay()`
+- The distinction between a software timer (checking elapsed time each loop cycle, as done here) and a hardware timer/interrupt (where the microcontroller itself triggers an event at a precise interval, independent of the main loop) — this project uses the software approach
+- How to structure clearly named constants (`LED_PIN`, `BLINK_INTERVAL`) and state variables (`ledState`, `previousMillis`) for readable, maintainable timing code
+- Why this pattern is the necessary foundation before working with true hardware interrupts: understanding software-based timing makes the value of hardware timers much clearer by comparison
 
 ## Circuit
-[Circuit Diagram](./Circuit%20Diagram%2036.png)
+![Circuit Diagram](./Circuit%20Diagram%2037.png)
 
-- Button (one leg) → Arduino pin 2
-- Button (other leg) → Arduino GND
-- LED anode → 220Ω resistor → Arduino pin 13
-- LED cathode → Arduino GND
+- LED anode through a resistor to Arduino pin 13
+- LED cathode to Arduino GND
 
 ## Components Used
 - Arduino Uno
-- 1x Push Button
 - 1x LED
-- 1x 220Ω Resistor
+- 1x Resistor
 
 ## Code Summary
 ```cpp
-const int buttonPin = 2;
-const int ledPin = 13;
+const int LED_PIN = 13;
+const long BLINK_INTERVAL = 500;
 
-volatile bool ledState = LOW;
-volatile unsigned long pressCount = 0;
-volatile unsigned long lastInterruptTime = 0;
-const unsigned long debounceDelay = 200;
+int ledState = LOW;
+unsigned long previousMillis = 0;
 
 void setup() {
-  pinMode(buttonPin, INPUT_PULLUP);
-  pinMode(ledPin, OUTPUT);
-  Serial.begin(9600);
-  attachInterrupt(digitalPinToInterrupt(buttonPin), handleButtonPress, FALLING);
+  pinMode(LED_PIN, OUTPUT);
 }
 
 void loop() {
-  digitalWrite(ledPin, ledState);
+  unsigned long currentMillis = millis();
 
-  static unsigned long lastReported = 0;
-  if (pressCount != lastReported) {
-    Serial.print("Button pressed! Count: ");
-    Serial.println(pressCount);
-    lastReported = pressCount;
-  }
-}
+  if (currentMillis - previousMillis >= BLINK_INTERVAL) {
+    previousMillis = currentMillis;
 
-void handleButtonPress() {
-  unsigned long currentTime = millis();
-  if (currentTime - lastInterruptTime > debounceDelay) {
-    ledState = !ledState;
-    pressCount++;
-    lastInterruptTime = currentTime;
+    ledState = (ledState == LOW) ? HIGH : LOW;
+    digitalWrite(LED_PIN, ledState);
   }
 }
 ```
 
 ## Test Results
-- Each button press toggled the LED and incremented the press count exactly once, with no double-counting
-- Serial output printed a clean, incrementing sequence (Count: 1, 2, 3, 4...) matching the number of actual clicks
-- Rapid repeated clicking was correctly filtered by the debounce window, with no extra counts registered per press
+- LED blinked reliably at the configured 500ms interval, confirmed visually in simulation
 
 ## Key Takeaway
-This was the first project where `loop()` was fully decoupled from an input — the button press is caught immediately by the ISR regardless of what else the program might be doing. This pattern becomes essential in more complex projects where `loop()` needs to run longer tasks (sensor readings, display updates, network calls) without risking a missed button press in between.
+This project cemented the software-timer pattern as second nature before moving on to true hardware interrupts (`attachInterrupt()`) and timer-driven designs later in this stage. The core idea — comparing elapsed time against a threshold every loop cycle — is the same mental model that scales up to far more complex multitasking behavior in later, more advanced projects.
 
 ## Simulation
 Built and tested on [Wokwi](https://wokwi.com).
 
 ## Previous Project
-[RTC + LCD Alarm Clock](../RTC-LCD-Alarm-Clock) — combining I2C devices, timing logic, and physical I/O.
+[DHT11/DHT22 Temperature & Humidity Sensor](../../04-sensors/dht-temp-humidity) — library-based multi-value sensor reading.
 
 ## Next Project
-_Coming soon._
+[Button Interrupt (attachInterrupt)](../button-interrupt) — moving from software timing into true hardware interrupts.
