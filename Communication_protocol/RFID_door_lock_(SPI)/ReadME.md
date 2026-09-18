@@ -11,7 +11,8 @@ This project uses an MFRC522 RFID reader to simulate a door lock: tapping a tag 
 - That MFRC522 modules run on 3.3V, not 5V, unlike most other modules used so far in this series
 
 ## Circuit
-![Circuit Diagram](./circuit-diagram.png)
+
+![Circuit Diagram](./Circuit%20Diagram%2040.png)
 
 - RFID SDA → Arduino pin 10
 - RFID SCK → Arduino pin 13
