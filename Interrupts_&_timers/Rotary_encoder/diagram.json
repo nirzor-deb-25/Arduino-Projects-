@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 0.6, "left": 76.2, "attrs": {} },
+    { "type": "wokwi-ky-040", "id": "encoder1", "top": 88.1, "left": -96.8, "attrs": {} }
+  ],
+  "connections": [
+    [ "encoder1:CLK", "uno:2", "green", [ "h0" ] ],
+    [ "encoder1:DT", "uno:3", "green", [ "h0" ] ],
+    [ "encoder1:SW", "uno:4", "green", [ "h0" ] ],
+    [ "encoder1:VCC", "uno:5V", "red", [ "h0" ] ],
+    [ "encoder1:GND", "uno:GND.2", "black", [ "h0" ] ]
+  ],
+  "dependencies": {}
+}
